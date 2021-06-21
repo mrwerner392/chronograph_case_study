@@ -8,6 +8,7 @@ const addReportIdToPage = store => {
   }
 }
 
+// #1
 const getPageCountByReportId = store => {
   const pageCountByReportId = {}
   if (typeof store.page === 'object') {
@@ -19,6 +20,7 @@ const getPageCountByReportId = store => {
   return pageCountByReportId
 }
 
+// #2
 const searchReports = (store, query) => {
   if (typeof query !== 'string' || query === '') return []
 
@@ -56,38 +58,38 @@ const searchInText = (regexp, text) => {
 }
 
 
-fetch('http://localhost:3000/data')
-.then(res => res.json())
-.then(res => {
-  const store = res
-
-  addReportIdToPage(store)
-
-  console.log(getPageCountByReportId(store))
-  console.log(searchReports(store, 'ten'))
-
-})
-
-
-// // #3
-// const makeFetch = async (endpoint, config) => {
-//   try {
-//     const response = await fetch('endpoint', {/*fetch configuration object*/})
-//     const data = await response.json()
-//     if (response.ok) {
-//       return data
-//     } else {
-//       return Promise.reject('some error message')
-//     }
-//   } catch (e) {
-//     return Promise.reject('some error message')
-//   }
-// }
-
-// makeFetch('search endpoint', {/*config object for search request*/})
+// fetch('http://localhost:3000/data')
+// .then(res => res.json())
 // .then(res => {
-//   /*handle res*/
+//   const store = res
+
+//   addReportIdToPage(store)
+
+//   console.log(getPageCountByReportId(store))
+//   console.log(searchReports(store, 'ten'))
+
 // })
-// .catch(error => {
-//   /*handle error*/
-// })
+
+
+// #3
+const makeFetch = async (endpoint, config) => {
+  try {
+    const response = await fetch('endpoint', {/*fetch configuration object*/})
+    const data = await response.json()
+    if (response.ok) {
+      return data
+    } else {
+      return Promise.reject('some error message')
+    }
+  } catch (e) {
+    return Promise.reject('some error message')
+  }
+}
+
+makeFetch('search endpoint', {/*config object for search request*/})
+.then(res => {
+  /*handle res*/
+})
+.catch(error => {
+  /*handle error*/
+})
