@@ -9,7 +9,7 @@ WHERE NOT EXISTS (SELECT pages.id FROM pages WHERE pages.document_id = documents
 
 #2.
 ```
-SELECT reports.title, COUNT(pages.id)
+SELECT reports.title, COUNT(pages.id) as page_count
 FROM reports
 INNER JOIN documents ON documents.report_id = reports.id
 INNER JOIN pages ON pages.document_id = documents.id
